@@ -134,41 +134,28 @@ async function uploadToCloudinary(file) {
 }
 
 async function sendEmailNotification(payload) {
-  // Load EmailJS dynamically
-  if (!window.emailjs) {
-    await new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-    window.emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
-  }
-
   const itemsText = payload.items
-    .map(i => `${i.name} (${i.variant || "N/A"}) × ${i.quantity}`)
+    .map(i => `${i.name} (${i.variant || "N/A"})`)
     .join(", ");
 
-  const templateParams = {
-    reference_id: payload.referenceId,
-    order_number: payload.orderNumber,
-    customer_email: payload.customerEmail,
-    email: payload.customerEmail,
-    request_type: payload.requestType,
-    reason: payload.reason,
-    items: itemsText,
-    notes: payload.notes || "None",
-    photo_url: payload.photoUrl || "No photo",
-    to_email: CONFIG.NOTIFICATION_EMAILS.join(","),
-    reply_to: payload.customerEmail,
-  };
-
-  await window.emailjs.send(
-    CONFIG.EMAILJS_SERVICE_ID,
-    CONFIG.EMAILJS_TEMPLATE_ID,
-    templateParams
-  );
+  await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      access_key: "d015a78a-6d93-4c8f-8923-64125390ab53",
+      subject: `[RETURN] ${payload.referenceId} — Order #${payload.orderNumber}`,
+      from_name: "SEEINVOID Returns Portal",
+      replyto: payload.customerEmail,
+      "Reference ID": payload.referenceId,
+      "Order Number": `#${payload.orderNumber}`,
+      "Customer Email": payload.customerEmail,
+      "Request Type": payload.requestType,
+      "Reason": payload.reason,
+      "Items": itemsText,
+      "Notes": payload.notes || "None",
+      "Photo": payload.photoUrl,
+    }),
+  });
 }
 
 // ── STYLES ──────────────────────────────────────
