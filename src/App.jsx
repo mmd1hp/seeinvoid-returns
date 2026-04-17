@@ -8,9 +8,6 @@ import { useState, useRef } from "react";
 // ── CONFIG ── inject via env vars in production ──
 const CONFIG = {
   SHOPIFY_MCP_URL: "https://seeinvoid-shopify-ai-production.up.railway.app/mcp",
-  EMAILJS_SERVICE_ID: process.env.REACT_APP_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID",
-  EMAILJS_TEMPLATE_ID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID",
-  EMAILJS_PUBLIC_KEY: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY",
   CLOUDINARY_CLOUD_NAME: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || "YOUR_CLOUD_NAME",
   CLOUDINARY_UPLOAD_PRESET: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || "seeinvoid_returns",
   NOTIFICATION_EMAILS: ["seeinvoid@gmail.com", "m7md1hp@gmail.com"],
