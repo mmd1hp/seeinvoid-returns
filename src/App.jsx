@@ -154,6 +154,7 @@ async function sendEmailNotification(payload) {
     reference_id: payload.referenceId,
     order_number: payload.orderNumber,
     customer_email: payload.customerEmail,
+    email: payload.customerEmail,
     request_type: payload.requestType,
     reason: payload.reason,
     items: itemsText,
