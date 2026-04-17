@@ -848,6 +848,26 @@ const css = `
     line-height: 1.65;
   }
 
+  /* ── BACK TO STORE ── */
+  .back-home-btn {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: 8px;
+  }
+
+  .back-home-btn:hover {
+    color: var(--accent);
+    border-color: var(--border-hover);
+  }
+
   /* ── FOOTER ── */
   .footer {
     margin-top: 40px;
@@ -1454,6 +1474,7 @@ export default function App() {
       <style>{css}</style>
       <div className="app">
         <div className="header">
+          <a href="https://seeinvoid.com" className="back-home-btn">← Back to Store</a>
           <img src="/logo.png" alt="SEEINVOID" className="logo-img" />
           <div className="logo-sub">Still · Aware</div>
           <div className="header-divider" />
